@@ -1,9 +1,17 @@
-all:
-	gcc -c search.c -o search.o
-	gcc -c utils.c -o utils.o
-	gcc -c bregdiv.c -o bregdiv.o
-	gcc -c bbtree.c -o bbtree.o
-	gcc -O2 -lm test.c bbtree.o bregdiv.o utils.o search.o -o testing 
+CC=gcc
+CCFLAGS=-Wall -O3
+LINKFLAGS=-lm
+SOURCES=search.c utils.c bregdiv.c bbtree.c test.c
+OBJECTS=$(SOURCES:.c=.o)
+EXECUTABLE=testBBT
+all: $(SOURCES) $(EXECUTABLE)
+
+$(EXECUTABLE): $(OBJECTS)
+	$(CC) $(CCFLAGS) $(OBJECTS) -o $@ $(LINKFLAGS)
+
+%.o:%.c
+	$(CC) $(CCFLAGS) -c $+
+
 clean:
 	rm -rf *.o
-	rm -rf testing
+	rm -rf testBBT

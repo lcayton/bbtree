@@ -1,6 +1,6 @@
 ***Bregman Ball Trees (bbtrees)***
 Lawrence Cayton
-lcayton@cs.ucsd.edu
+work@lcayton.com
 
 (C) Copyright 2008, Lawrence Cayton
 
@@ -19,7 +19,7 @@ with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 -----------------------------------------------------------
 
-This is a C implementation of the bregman ball trees data structure 
+This is a C implementation of the bregman ball tree data structure 
 described in 
 
 L. Cayton, Fast nearest neighbor retrieval for bregman divergences.  
@@ -68,7 +68,7 @@ USING
 To deploy the bbtree data structure in an application, you will likely
 need to integrate this code into yours.  The test.c file provides an
 example of how to use the software.  To experiment with it, type 
->testing 
+$ testBBT
 at the prompt and a list of options will be displayed.  
 
 The default bucketsize is 50, which was used in the exact NN
@@ -109,15 +109,14 @@ spaces.  All points are read as doubles.
 -----------------------------------------------------------
 ISSUES
 
-The k-means implementation used in the build procedures will not work 
-properly in some cases.  In particular, unbounded interpoint 
-distances can trip it up.  The problem is that k-means is initialized 
-with a random point.  This is fairly easy to fix.
+Unbounded interpoint distances can trip up the k-means implementation
+used in the build procedure.  The problem is that k-means is currently
+initialized with a random point, rather than an average.
 
 
 -----------------------------------------------------------
 QUESTIONS, COMMENTS, ETC
 
-Please contact lcayton@cs.ucsd.edu with any bug reports, questions,
+Please contact work@lcayton.com with any bug reports, questions,
 comments, suggestions, significant optimizations, etc.  I'm also
 interested to hear about any applications of the bbtree.  

@@ -46,7 +46,7 @@ void calcklgradfstar(double *gfs,double *x, int d){
 }
 
 void calckldivmat(double **dmat, double **x, double** y, int n, int m, int d){
-  int i,j,k;
+  int i,j;
   for (i=0;i<n;i++){
     for(j=0;j<m;j++)
       dmat[i][j] = calckldiv(x[i],y[j],d);
@@ -164,6 +164,7 @@ double calcisdiv(double *x, double *y, int d){
   int i;
   for (i=0;i<d;i++)
     ans+=x[i]/y[i] - log(x[i]/y[i]) -1;
+  return ans;
 }
 
 

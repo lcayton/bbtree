@@ -7,7 +7,7 @@
 #include<limits.h>
 #include<stdlib.h>
 #include<stdio.h>
-#include<time.h>
+#include<sys/time.h>
 #include<math.h>
 #include "bbtree.h"
 #include "utils.h"
@@ -96,8 +96,8 @@ treenode* setupNode(int n, int d){
 
 
 void findSplitKmeans(int* indsL, int* indsR, int* lLength, int* rLength,double**data, int*inds, int n, int d, bregdiv div){
-  int p,lp,rp;
-  int i, rCount,lCount,j,k;
+  int lp,rp;
+  int i, rCount,lCount,j;
   double cost;
 
   int MAXITS = 10;
@@ -201,7 +201,7 @@ void findSplit(int* indsL, int* indsR, int* lLength, int* rLength,double**data, 
 }
 
 void findSplitMaxVar(int* indsL, int* indsR, int* lLength, int* rLength,double**data, int*inds, int n, int d, bregdiv div){
-  int p,lp,rp;
+  int rp;
   int i,j;
 
   *lLength = floor(n/2.0);

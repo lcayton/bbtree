@@ -4,7 +4,7 @@
 #include <string.h>
 #include <math.h>
 #include <float.h>
-#include <time.h>
+#include <sys/time.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <limits.h>
@@ -26,7 +26,7 @@ int k=1;
 
 int main(int argc, char** argv){
   int i,j, *NNs;
-  double **x,**q, bbtime, brutetime,triangletime, *dToNNs,divTemp;
+  double **x,**q, bbtime, brutetime,*dToNNs,divTemp;
   treenode *root;
   struct timeval tvB,tvE;
 
@@ -122,7 +122,7 @@ int main(int argc, char** argv){
   printf("BRUTE time elapsed = %6.3f \n",brutetime);
   
   if(isOutfile){
-    writeDoubs(3,outfile,bbtime,triangletime,brutetime);
+    writeDoubs(2,outfile,bbtime,brutetime);
   }
 
   for(i=0;i<n;i++)
@@ -141,7 +141,7 @@ int main(int argc, char** argv){
 void processArgs(int argc, char**argv){
   int i=1;
   if(argc <= 1){
-    printf("usage:\n testTree -f dataFile -q queryFile -n numPts -m numQueries -d dim [-e epsilon] [-b bregdiv] [-o outFile] [-s bucketsize] [-k numNeighbors] \n");
+    printf("usage:\n testBBT -f dataFile -q queryFile -n numPts -m numQueries -d dim [-e epsilon] [-b bregdiv] [-o outFile] [-s bucketsize] [-k numNeighbors] \n");
     printf("\n\t where bregdiv = %d for l_2^2 (default) \n\t       bregdiv = %d for KL \n\t       bregdiv = %d for exponential (conj to KL) \n\t       bregdiv = %d for Itakura-Saito\n\n", USEL2, USEKL,USEKLD,USEIS);
     exit(0);
   }

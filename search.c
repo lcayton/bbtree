@@ -22,7 +22,7 @@ int leafBound=INT_MAX;
 
 //This method performs nearest neighbor search for m queries.
 void multisearch(treenode* root, double **Q, double**data, bregdiv div, int n, int d, int m, double eps, int k, int maxLeaves){
-  int curNN,i,j;
+  int i,j;
   double* qp;
   x = calloc(d,sizeof(double));
   xp = calloc(d,sizeof(double));

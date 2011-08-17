@@ -137,42 +137,50 @@ void writeNode(treenode* node, int d, FILE* fp){
 }
 
 treenode* readTree(char*file){
-  int i,d;
+  int d;
   FILE *fp = fopen(file,"r");
   if(fp==NULL){
     fprintf(stderr,"unable to open input file... exiting \n");
     exit(1);
   }
-  fscanf(fp,"%d \n",&d);
+  if(fscanf(fp,"%d \n",&d)==EOF){
+    fprintf(stderr, "error reading tree... exiting \n");
+    exit(1);
+  }
   return readNode(d,fp);
   fclose(fp);
 }
 
 treenode* readNode(int d,FILE* fp){
-  int i;
+  int i, pos_error;
   float temp;
 
   treenode* node = (treenode*)calloc(1,sizeof(treenode));
-  fscanf(fp,"%d %f %d\n",&(node->n),&temp,&(node->isLeaf));
+  pos_error = fscanf(fp,"%d %f %d\n",&(node->n),&temp,&(node->isLeaf));
   node->R = (double)temp;
   node->mu = calloc(d,sizeof(double));
   node->mup = calloc(d,sizeof(double));
   node->inds = calloc(node->n,sizeof(int));
 
   for(i=0;i<d;i++){
-    fscanf(fp,"%f ",&temp);
+    pos_error = fscanf(fp,"%f ",&temp);
     node->mu[i]=(double)temp;
   }
-  fscanf(fp,"\n");
+  pos_error = fscanf(fp,"\n");
   for(i=0;i<d;i++){
-    fscanf(fp,"%f ",&temp);
+    pos_error = fscanf(fp,"%f ",&temp);
     node->mup[i]=(double)temp;
   }
-  fscanf(fp,"\n");
+  pos_error = fscanf(fp,"\n");
   for(i=0;i< node->n;i++){
-    fscanf(fp,"%d ",&(node->inds[i]));
+    pos_error = fscanf(fp,"%d ",&(node->inds[i]));
   }
-  fscanf(fp,"\n");
+  pos_error = fscanf(fp,"\n");
+
+  if( pos_error == EOF){
+    fprintf(stderr, "error reading tree... exiting \n");
+    exit(1);
+  }
   
   if (!(node->isLeaf)){
     node->l=readNode(d,fp);
